@@ -1,20 +1,28 @@
-/*
- *  This program tries to construct a full genome from reads.
- *  It recieves FASTA-style input and converts it into a graph input 
- *  format, which looks like:
- *  1 -> 2,3,4
- *  2 -> 1,4
- *  with numbers representing nodes (reads) and positioning representing
- *  directed edges. A read points to another read if they overlap, eg.
- *  ABCDE would point to BCDEF, as their suffixes and prefixes overlap.
- *
- *  After the input has been formatted, a Debrujin analysis is done  by
- *  finding every path that only goes through 1-1 nodes from non 1-1 nodes.
- *  Finally, isolated cycles are found by checking 1-1 nodes which have not 
- *  been visited by prior analysis.
- *
- *  The resulting FASTA-formatted data file contains every confidently
- *  reconstructed section of the genome.
+/**
+ * This program tries to construct a full genome from reads.
+ * <p> 
+ * It recieves FASTA-style input and converts it into a graph input 
+ * format, which looks like:
+ * <ul>
+ * <li>1 -> 2,3,4
+ * <li>2 -> 1,4
+ * <li>4 -> 1
+ * </ul>
+ * <p>
+ * With numbers representing nodes (reads) and positioning representing
+ * directed edges. A read points to another read if they overlap, eg.
+ * ABCDE would point to BCDEF, as their suffixes and prefixes overlap.
+ * <p>
+ * After the input has been formatted, a Debrujin analysis is done  by
+ * finding every path that only goes through 1-1 nodes from non 1-1 nodes.
+ * Finally, isolated cycles are found by checking 1-1 nodes which have not 
+ * been visited by prior analysis.
+ * <p>
+ * The resulting FASTA-formatted data file contains every confidently
+ * reconstructed section of the genome.
+ * 
+ * @author Karl Danielsen
+ * @version 0.3
  */
 
 import java.util.*;
@@ -25,7 +33,12 @@ public class Contig{
     private static final int THRESHOLD = 2;
     private static final int MERLEN = 30;
     private static String[] mers;
-	
+
+    /**
+     * Called when the program is run. Stitches together other modules.
+     *
+     * @param args The passed in command-line arguments.
+     */
     public static void main(String[] args){
 	reads = new String[NODES];
 	graph = new ArrayList<String[]>();
@@ -218,10 +231,12 @@ public class Contig{
     }
 
 
-    /*
-     *  In order to find self-contained cycles, where every node has
-     *  one edge entering it and leaving it, nodes not visited by the
-     *  DeBrujin analysis are checked for cycles.
+    /**
+     * Finds self-contained cycles, where every node has
+     * one edge entering it and leaving it.
+     *
+     * @param paths A mutable list of the isolated paths found
+     * @return      the mutated version of paths
      */
     public static ArrayList<String> addIsolated(ArrayList<String> paths){
 	//Find an unvisited node in graphs
@@ -241,6 +256,14 @@ public class Contig{
 	}
 	return paths;
     }
+
+    /**
+     * Retrieves the node with a given index. If no such node exists,
+     * returns a burner string.
+     *
+     * @param num the index within the graph to access
+     * @return    the node value as a string array
+     */
     public static String[] getNode(String num){
 	for(String[] node : graph){
 	    if(num.equals(node[0]))
