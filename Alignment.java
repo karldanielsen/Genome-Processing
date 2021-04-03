@@ -1,13 +1,13 @@
 /**
  * This program recieves a reference genome as a file argument,
  * and then accepts reads from another, unsequenced genome (from 
- * STDIN)and locates places where the two differ.
+ * STDIN) and locates places where the two differ.
  * <p>
  * Multiple differences are checked for:
  * <ul>
- * <li>SNP (Snips)       where one allele is changed
- * <li>INS (Insertions)  where a sequence is inserted in the new genome
- * <li>DEL (Deletions)   where a sequence is missing in the new genome
+ * <li>SNP (Snips)       where one allele is changed</li>
+ * <li>INS (Insertions)  where a sequence is inserted in the new genome</li>
+ * <li>DEL (Deletions)   where a sequence is missing in the new genome</li>
  * </ul> 
  * 
  * @author Karl Danielsen

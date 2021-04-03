@@ -4,9 +4,9 @@
  * It recieves FASTA-style input and converts it into a graph input 
  * format, which looks like:
  * <ul>
- * <li>1 -> 2,3,4
- * <li>2 -> 1,4
- * <li>4 -> 1
+ * <li>1 -> 2,3,4</li>
+ * <li>2 -> 1,4</li>
+ * <li>4 -> 1</li>
  * </ul>
  * <p>
  * With numbers representing nodes (reads) and positioning representing
